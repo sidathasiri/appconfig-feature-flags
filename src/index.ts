@@ -7,6 +7,7 @@ const bankingAppVerificationFeatureFlagClient = new FeatureFlagClient(
   'verification-flags',
   'DEV'
 );
+
 bankingAppVerificationFeatureFlagClient.initialize();
 
 app.get('/status', async (req: any, res: any) => {
