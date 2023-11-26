@@ -5,10 +5,10 @@ import {
 } from '@aws-sdk/client-appconfigdata';
 
 export default class FeatureFlagClient {
-  client: AppConfigDataClient;
-  nextToken: string | undefined;
+  private client: AppConfigDataClient;
+  private nextToken: string | undefined;
   pollInterval: number;
-  flagState = {};
+  private flagState = {};
   application: string;
   configProfile: string;
   env: string;
@@ -26,7 +26,7 @@ export default class FeatureFlagClient {
     this.env = env;
   }
 
-  async getInitialToken() {
+  private async getInitialToken() {
     const getSession = new StartConfigurationSessionCommand({
       ApplicationIdentifier: this.application,
       ConfigurationProfileIdentifier: this.configProfile,
@@ -38,7 +38,7 @@ export default class FeatureFlagClient {
     return sessionToken.InitialConfigurationToken || '';
   }
 
-  async loadConfiguration() {
+  private async loadConfiguration() {
     const command = new GetLatestConfigurationCommand({
       ConfigurationToken: this.nextToken,
     });
@@ -52,7 +52,7 @@ export default class FeatureFlagClient {
     }
   }
 
-  async initialize() {
+  public async initialize() {
     if (this.nextToken) {
       throw new Error('Client already initialized');
     }
@@ -78,7 +78,7 @@ export default class FeatureFlagClient {
     }, this.pollInterval * 1000);
   }
 
-  getFlagStatus() {
+  public getFlagStatus() {
     return this.flagState;
   }
 }
