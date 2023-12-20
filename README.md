@@ -4,6 +4,6 @@ This repository contains a very simple implementation to use AppConfig feature f
 
 ## How to Deploy
 - Setup the AWS credentials
-- Setup the AWS account id and the region you want to deploy in `bin/appconfig-feature-flags.ts``
+- Setup the AWS account id and the region you want to deploy in `bin/appconfig-feature-flags.ts`
 - Run `npm install`
 - Run `cdk deploy`
